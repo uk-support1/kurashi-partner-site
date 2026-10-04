@@ -30,77 +30,72 @@
     if (location.hostname === 'uk-support1.github.io' && location.pathname.startsWith('/cat-comparison-site/')) location.replace(new URL('cat-home.html', location.href).href);
   </script>
   <script defer src="assets/kurashi-portal.js"></script>
+  <link rel="preload" as="image" href="assets/photos/quiet-room-1800.webp" imagesrcset="assets/photos/quiet-room-900.webp 900w, assets/photos/quiet-room-1800.webp 1800w" imagesizes="100vw" fetchpriority="high">
 </head>
-<body>
-  <a class="kp-skip-link" href="#main-content">本文へ移動</a>
-  <header class="kp-header" id="top">
-    <div class="kp-shell kp-header-inner">
-      <a class="kp-brand" href="https://kurashi-partner-ku.com/" aria-label="くらしパートナー ホーム">
-        <img src="assets/kurashi-partner-logo.png" alt="くらしパートナー">
-      </a>
-      <button class="kp-menu-button" type="button" aria-expanded="false" aria-controls="kp-navigation"><span aria-hidden="true">☰</span><span>メニュー</span></button>
-      <nav class="kp-navigation" id="kp-navigation" aria-label="メインナビゲーション">
-        <a href="#about">くらしパートナーとは</a>
-        <a href="#media">専門メディア</a>
-        <a href="#future">これからの展開</a>
-        <a class="kp-nav-cat" href="https://uk-support1.github.io/cat-comparison-site/">猫パートナーを見る</a>
-      </nav>
-    </div>
+<body id="top">
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="https://kurashi-partner-ku.com/" aria-label="くらしパートナー ホーム"><img src="assets/kurashi-partner-logo-compact.webp" alt="" width="437" height="320"><span>くらしパートナー<small>暮らしの比較と読みもの</small></span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-navigation"><span class="menu-lines" aria-hidden="true"></span><span>メニュー</span></button>
+    <nav class="main-navigation" id="main-navigation" aria-label="メインナビゲーション"><a href="#future">テーマから探す</a><a href="#compare">比べて選ぶ</a><a href="#journal">読みもの</a><a href="#media">専門メディア</a><a href="#about">私たちについて</a></nav></div>
+    <nav class="mobile-shortcuts" aria-label="主要コンテンツ"><a href="#future">テーマ</a><a href="#compare">比較</a><a href="#journal">読みもの</a><a href="#media">猫パートナー</a></nav>
   </header>
-
   <main id="main-content">
-    <section class="kp-hero" aria-labelledby="hero-title">
-      <div class="kp-hero-orbit kp-orbit-one" aria-hidden="true"></div>
-      <div class="kp-hero-orbit kp-orbit-two" aria-hidden="true"></div>
-      <div class="kp-shell kp-hero-grid">
-        <div class="kp-hero-copy">
-          <p class="kp-eyebrow">LIFE, CLEARLY CHOSEN.</p>
-          <h1 id="hero-title">暮らしの中の<span>「選ぶ」を、</span><br>もっとわかりやすく。</h1>
-          <p>毎日にある小さな迷いに、比べやすさと納得できる視点を。くらしパートナーは、生活に寄り添う専門メディアを届けます。</p>
-          <div class="kp-hero-actions">
-            <a class="kp-button kp-button-primary" href="#media">専門メディアを見る</a>
-            <a class="kp-text-link" href="#about">私たちについて <span aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-        <div class="kp-hero-visual" aria-label="暮らしの選択を支えるイメージ">
-          <div class="kp-hero-card kp-card-note"><span>くらしの選択を<br>ひとつずつ、心地よく。</span></div>
-          <div class="kp-hero-card kp-card-logo"><img src="assets/kurashi-partner-logo.png" alt=""></div>
-          <div class="kp-hero-card kp-card-points"><span>比べる</span><span>知る</span><span>選ぶ</span></div>
-          <div class="kp-hero-leaf kp-leaf-a" aria-hidden="true"></div><div class="kp-hero-leaf kp-leaf-b" aria-hidden="true"></div>
-        </div>
-      </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-image" src="assets/photos/quiet-room-1800.webp" srcset="assets/photos/quiet-room-900.webp 900w, assets/photos/quiet-room-1800.webp 1800w" sizes="100vw" width="1800" height="1200" alt="自然光と植物に囲まれた部屋。木のテーブルに一杯のコーヒー" fetchpriority="high" decoding="async">
+      <div class="hero-shade"></div><div class="hero-copy"><p class="eyebrow">A LITTLE BETTER, EVERY DAY.</p><h1 id="hero-title">暮らしに、<br>ちょうどいい選択を。</h1><p class="hero-description">毎日の「どれがいい？」を、もっとわかりやすく。<br>比較と読みものから、あなたの暮らしに合う答えを。</p><a class="button button-light" href="#pickup">暮らしのおすすめを見る <span aria-hidden="true">↗</span></a></div>
+      <div class="hero-caption"><span>くらしの選択を、ひとつずつ。</span><a href="#pickup" aria-label="暮らしのおすすめへスクロール">SCROLL <span aria-hidden="true">↓</span></a></div>
     </section>
-
-    <section class="kp-intro kp-shell kp-reveal" id="about" aria-labelledby="about-title">
-      <p class="kp-eyebrow">ABOUT US</p>
-      <div class="kp-intro-grid"><h2 id="about-title">迷ったときに、<br>気持ちよく決められる場所へ。</h2><div><p>暮らしの中には、毎日使うもの、家族のために選ぶもの、少し先の自分のために考えるものがあります。</p><p>くらしパートナーは、そうした選択を急かさず、違いや基準を整理して、納得して選べるきっかけをつくる総合ブランドです。</p></div></div>
-      <div class="kp-values" aria-label="くらしパートナーが大切にすること"><div><strong>01</strong><h3>比べやすく</h3><p>違いと判断の軸を、丁寧に整理します。</p></div><div><strong>02</strong><h3>暮らしに寄り添って</h3><p>使う場面を想像できる情報を届けます。</p></div><div><strong>03</strong><h3>わかりやすく</h3><p>初めてでも迷いにくい言葉を選びます。</p></div></div>
+    <section class="section pickup shell" id="pickup">
+      <div class="section-heading"><div><p class="eyebrow">PICK UP</p><h2>暮らしのおすすめ</h2></div><p>小さな気づきが、毎日を少し心地よく。</p></div>
+      <div class="bento">
+        <a class="picture-story bento-main" href="https://cat.kurashi-partner-ku.com/compare/cat-toilets.html"><img src="assets/photos/living-1800.webp" srcset="assets/photos/living-900.webp 900w, assets/photos/living-1800.webp 1800w" sizes="(min-width: 900px) 50vw, 100vw" width="1800" height="1200" alt="植物や木の家具を取り入れた、リビングとキッチンのある住まい" loading="lazy" decoding="async"><div class="story-copy"><span class="tag">ペットとの暮らし · 比較</span><h3>掃除しやすい、気持ちいい。<br>毎日に合う猫トイレ選び。</h3><p>オープン・ドーム・システム・自動。4タイプを暮らしの目線で。</p><span class="story-arrow" aria-hidden="true">↗</span></div></a>
+        <a class="small-story" href="https://cat.kurashi-partner-ku.com/compare/okara-litter.html"><div class="image-wrap"><img src="assets/photos/cat-home-600.webp" width="600" height="900" alt="植物のある部屋のソファでくつろぐ猫" loading="lazy" decoding="async"></div><span class="category-label">COMPARE · 猫砂</span><h3>猫にも、暮らしにも。<br>おから猫砂12商品を比較。</h3><span class="text-arrow" aria-hidden="true">読む ↗</span></a>
+        <a class="small-story" href="https://cat.kurashi-partner-ku.com/breeds/"><div class="image-wrap"><img src="assets/photos/mii-600.webp" width="600" height="800" alt="ねこパートナーのミー。顔を近づけてこちらを見ている猫" loading="lazy" decoding="async"></div><span class="category-label">JOURNAL · 猫種図鑑</span><h3>知るほど、愛おしい。<br>猫たちの個性に出会う。</h3><span class="text-arrow" aria-hidden="true">読む ↗</span></a>
+        <a class="picture-story bento-note" href="#about"><img src="assets/photos/coffee-1000.webp" srcset="assets/photos/coffee-600.webp 600w, assets/photos/coffee-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="625" alt="キッチンのカウンターに置かれた、緑色のカップとコーヒーの道具" loading="lazy" decoding="async"><div class="story-copy"><span class="category-label">ABOUT US</span><h3>「なんとなく」から、<br>「これがいい」へ。</h3><span class="story-arrow" aria-hidden="true">↗</span></div></a>
+      </div><p class="image-note">生活シーンの写真はイメージです。現在の記事は専門メディア「猫パートナー」で公開しています。</p>
     </section>
-
-    <section class="kp-media-section" id="media" aria-labelledby="media-title">
-      <div class="kp-shell"><div class="kp-section-heading kp-reveal"><div><p class="kp-eyebrow">SPECIALIST MEDIA</p><h2 id="media-title">専門メディア</h2></div><p>テーマごとに、深く、やさしく。<br>暮らしのパートナーを増やしていきます。</p></div>
-        <div class="kp-media-grid">
-          <article class="kp-cat-feature kp-reveal">
-            <div class="kp-cat-visual"><img src="assets/mii-mix-cat.jpg" alt="窓辺でくつろぐ猫" loading="lazy"><span class="kp-cat-shape" aria-hidden="true"></span><span class="kp-live">公開中</span></div>
-            <div class="kp-cat-copy"><img class="kp-cat-logo" src="assets/neko-partner-logo.png" alt="ねこパートナー"><p class="kp-cat-kicker">猫との暮らしを、もっと心地よく。</p><h3>猫用品を、比べて選べる専門メディア。</h3><p>猫砂や猫トイレの比較から、猫種図鑑、気軽に楽しめる「肉球であそぶ」まで。猫と暮らす毎日に役立つ情報を集めています。</p><ul class="kp-topic-list"><li>猫砂比較</li><li>猫トイレ比較</li><li>猫種図鑑</li><li>肉球であそぶ</li></ul><a class="kp-button kp-button-primary" href="https://uk-support1.github.io/cat-comparison-site/">猫パートナーを見る</a></div>
-          </article>
-          <div class="kp-soon-grid kp-reveal" aria-label="準備中の専門メディア">
-            <article class="kp-soon-card"><span>COMING SOON</span><h3>美容パートナー</h3><p>自分らしい毎日のための、選び方の情報を準備中です。</p></article>
-            <article class="kp-soon-card"><span>COMING SOON</span><h3>家電パートナー</h3><p>暮らしに合う家電選びのための情報を準備中です。</p></article>
-            <article class="kp-soon-card"><span>COMING SOON</span><h3>生活用品パートナー</h3><p>日々の道具を心地よく選ぶための情報を準備中です。</p></article>
-            <article class="kp-soon-card"><span>COMING SOON</span><h3>子育て・健康</h3><p>家族の暮らしに寄り添うテーマを準備中です。</p></article>
-          </div>
-        </div>
-      </div>
+    <section class="themes section" id="future"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">FIND YOUR THEME</p><h2>何をお探しですか？</h2></div><p>暮らしのテーマから探す。</p></div>
+      <!-- Published categories use an anchor; planned categories deliberately have no link. -->
+      <div class="theme-rail" tabindex="0" role="region" aria-label="暮らしのテーマ。スマートフォンでは横にスクロールできます">
+        <a class="theme theme-live" href="https://uk-support1.github.io/cat-comparison-site/"><div class="image-wrap"><img src="assets/photos/cat-home-600.webp" width="600" height="900" alt="ソファの上でリラックスする猫" loading="lazy" decoding="async"><span class="status">公開中</span></div><span class="eyebrow">PET</span><h3>ペットとの暮らし <span aria-hidden="true">↗</span></h3><p>猫用品・猫種・猫との毎日</p></a>
+<div class="theme"><div class="image-wrap"><img src="assets/photos/ceramics-600.webp" width="600" height="1066" alt="木の棚に並んだ器と小さな植物" loading="lazy" decoding="async"><span class="status status-soon">COMING SOON</span></div><span class="eyebrow">DAILY GOODS</span><h3>生活用品・住まい</h3><p>いつもの道具を、心地よく。</p></div>
+<div class="theme"><div class="image-wrap"><img src="assets/photos/cooking-600.webp" width="600" height="900" alt="明るいキッチンで料理をする日常のひとこま" loading="lazy" decoding="async"><span class="status status-soon">COMING SOON</span></div><span class="eyebrow">HOUSEWORK</span><h3>家事・家電</h3><p>毎日のひと手間を、軽やかに。</p></div>
+<div class="theme"><div class="image-wrap"><img src="assets/photos/plants-600.webp" width="600" height="800" alt="植物とクッションに囲まれた、くつろぎの空間" loading="lazy" decoding="async"><span class="status status-soon">COMING SOON</span></div><span class="eyebrow">SELF & FAMILY</span><h3>美容・健康・子育て</h3><p>自分にも、家族にもやさしく。</p></div>
+      </div><div class="theme-foot"><p>第一弾は、猫との暮らしから。<br>これから、美容パートナー・家電パートナー・生活用品パートナーや、子育て・健康、サービスの情報へ広げていきます。</p><a class="underlined-link" href="#media">公開中の専門メディア <span aria-hidden="true">↗</span></a></div>
+    </div></section>
+    <section class="compare section" id="compare"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">COMPARE</p><h2>暮らしの「どれがいい？」<br>比べて、選ぶ。</h2></div><p>価格だけではわからない、<br>毎日の使いやすさまで。</p></div>
+      <article class="editorial editorial-first reveal"><a class="editorial-photo" href="https://cat.kurashi-partner-ku.com/compare/okara-litter.html" aria-label="おから猫砂12商品の比較を読む"><img src="assets/photos/cat-home-1000.webp" srcset="assets/photos/cat-home-600.webp 600w, assets/photos/cat-home-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1499" alt="ソファでくつろぐ猫と、部屋の植物" loading="lazy" decoding="async"><span class="photo-index" aria-hidden="true">01 / COMPARE</span></a><div class="editorial-copy"><p class="category-label">猫パートナー · 猫砂比較</p><h3>猫砂ひとつで、<br>日々の片づけが変わる。</h3><p>消臭、固まりやすさ、飛び散り、続けやすい価格。おから猫砂12商品を、気になる条件から見比べられます。</p><ul class="compare-points"><li>ニオイへの配慮</li><li>毎日の掃除</li><li>買い続けやすさ</li></ul><a class="button" href="https://cat.kurashi-partner-ku.com/compare/okara-litter.html">猫砂を比較する <span aria-hidden="true">↗</span></a><a class="underlined-link secondary-link" href="https://cat.kurashi-partner-ku.com/articles/how-to-choose.html">まずは、選び方の6つのポイントから <span aria-hidden="true">↗</span></a></div></article>
+      <article class="editorial editorial-reverse reveal"><a class="editorial-photo" href="https://cat.kurashi-partner-ku.com/compare/cat-toilets.html" aria-label="猫トイレ4タイプの比較を読む"><img src="assets/photos/living-900.webp" width="900" height="600" alt="猫と暮らす空間づくりを考える、明るい住まいのイメージ" loading="lazy" decoding="async"><span class="photo-index" aria-hidden="true">02 / COMPARE</span></a><div class="editorial-copy"><p class="category-label">猫パートナー · 猫トイレ比較</p><h3>猫にも、人にも。<br>ちょうどいいトイレを。</h3><p>掃除のしやすさ、ニオイ、砂の飛び散り。4タイプの違いを知って、住まいと猫に合う選び方を。</p><a class="underlined-link" href="https://cat.kurashi-partner-ku.com/compare/cat-toilets.html">猫トイレ4タイプを比較する <span aria-hidden="true">↗</span></a></div></article>
+    </div></section>
+    <section class="special" aria-labelledby="special-title"><img src="assets/photos/plants-1000.webp" srcset="assets/photos/plants-600.webp 600w, assets/photos/plants-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1333" alt="たくさんの植物と自然光がある、日常のリビング" loading="lazy" decoding="async"><div class="special-shade"></div><div class="special-copy"><p class="eyebrow">SPECIAL · OUR PHILOSOPHY</p><h2 id="special-title">心地よい暮らしは、<br>小さな選択から。</h2><p>自分に合うものを、少しずつ。<br>比べる時間も、暮らしを楽しむ時間に。</p><a class="underlined-link" href="#about">くらしパートナーとは <span aria-hidden="true">↗</span></a></div></section>
+    <section class="reading section shell" id="reading">
+      <div class="section-heading"><div><p class="eyebrow">READING GUIDE</p><h2>まず読みたい、5つの話。</h2></div><p>迷ったときは、ここから。<br>おすすめの読む順番でご紹介します。</p></div>
+      <ol class="reading-grid">
+        <li class="reading-first"><a href="https://cat.kurashi-partner-ku.com/articles/how-to-choose.html"><div class="image-wrap"><img src="assets/photos/ceramics-1000.webp" srcset="assets/photos/ceramics-600.webp 600w, assets/photos/ceramics-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1777" alt="暮らしに合う道具を選ぶ、器の並んだ木の棚のイメージ" loading="lazy" decoding="async"><span class="reading-number" aria-hidden="true">01</span></div><div class="reading-first-copy"><p class="category-label">選び方の基本</p><h3>猫砂選びで、<br>最初に見る6つのこと。</h3><p>種類、消臭、固まり方。迷ったら、選ぶ軸を知るところから。</p><span class="text-arrow" aria-hidden="true">読む ↗</span></div></a></li>
+        <li><a class="reading-row" href="https://cat.kurashi-partner-ku.com/articles/okara-basics.html"><span class="reading-number" aria-hidden="true">02</span><img src="assets/photos/quiet-room-600.webp" width="600" height="400" alt="植物のある部屋の木のテーブル" loading="lazy" decoding="async"><div><p class="category-label">知って選ぶ</p><h3>おから猫砂の基本。<br>特徴と気をつけたいこと。</h3></div><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+<li><a class="reading-row" href="https://cat.kurashi-partner-ku.com/articles/odor-control.html"><span class="reading-number" aria-hidden="true">03</span><img src="assets/photos/coffee-600.webp" width="600" height="375" alt="カウンターに置かれた緑色のカップ" loading="lazy" decoding="async"><div><p class="category-label">日々の困りごと</p><h3>ニオイが気になるときの、<br>消臭重視の猫砂選び。</h3></div><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+<li><a class="reading-row" href="https://cat.kurashi-partner-ku.com/articles/kitten-guide.html"><span class="reading-number" aria-hidden="true">04</span><img src="assets/photos/mii-600.webp" width="600" height="800" alt="つぶらな目でこちらを見るミー" loading="lazy" decoding="async"><div><p class="category-label">はじめての猫との暮らし</p><h3>子猫の猫砂選びで、<br>気をつけたいこと。</h3></div><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+<li><a class="reading-row" href="https://cat.kurashi-partner-ku.com/articles/multi-cat-guide.html"><span class="reading-number" aria-hidden="true">05</span><img src="assets/photos/cat-home-600.webp" width="600" height="900" alt="ソファでゆっくり過ごす猫" loading="lazy" decoding="async"><div><p class="category-label">続けやすい暮らし</p><h3>多頭飼いの猫砂。<br>無理なく続ける工夫。</h3></div><span class="row-arrow" aria-hidden="true">↗</span></a></li>
+      </ol><p class="image-note">アクセス数による人気順位ではなく、おすすめの読む順番です。写真は暮らしのイメージです。</p>
     </section>
-
-    <section class="kp-future kp-shell kp-reveal" id="future" aria-labelledby="future-title">
-      <div><p class="kp-eyebrow">LOOKING AHEAD</p><h2 id="future-title">これからも、暮らしの<br>選択肢を広げていきます。</h2></div>
-      <p>猫との暮らしを起点に、美容、家電、生活用品、子育て、健康などへ。テーマごとに専門性を大切にしながら、選ぶ時間が少し楽しみになるメディアを育てていきます。</p>
-    </section>
+    <section class="journal section" id="journal"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">NEW & UPDATED</p><h2>新着・更新の読みもの</h2></div><a class="underlined-link" href="https://cat.kurashi-partner-ku.com/articles/">猫パートナーの読みもの一覧 <span aria-hidden="true">↗</span></a></div>
+      <div class="journal-grid"><a class="journal-lead" href="https://cat.kurashi-partner-ku.com/articles/cat-allergy.html"><div class="image-wrap"><img src="assets/photos/cat-home-1000.webp" srcset="assets/photos/cat-home-600.webp 600w, assets/photos/cat-home-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1499" alt="部屋のソファでくつろぐ猫" loading="lazy" decoding="async"></div><p class="article-meta"><time datetime="2026-10-04">2026.10.04 更新</time><span>猫との暮らし</span></p><h3>猫アレルギーでも猫と暮らせる？<br>猫種と暮らし方のコツを知る。</h3><span class="text-arrow" aria-hidden="true">読む ↗</span></a>
+        <div class="journal-list"><a class="journal-row" href="https://cat.kurashi-partner-ku.com/articles/cat-allergy-deep-guide.html"><img src="assets/photos/mii-600.webp" width="600" height="800" alt="ミーの顔のアップ" loading="lazy" decoding="async"><div><p class="article-meta"><time datetime="2026-10-04">2026.10.04 更新</time></p><h3>猫アレルギーはなぜ起こる？<br>Fel d 1・猫種差・個体差を詳しく。</h3><span class="category-label">猫との暮らし</span></div><span class="row-arrow" aria-hidden="true">↗</span></a>
+<a class="journal-row" href="https://cat.kurashi-partner-ku.com/compare/cat-toilets.html"><img src="assets/photos/living-900.webp" width="900" height="600" alt="キッチンとつながる明るい生活空間" loading="lazy" decoding="async"><div><p class="article-meta"><time datetime="2026-10-03">2026.10.03 更新</time></p><h3>猫トイレ4タイプを、<br>掃除・ニオイ・飛び散りで比較。</h3><span class="category-label">猫用品の比較</span></div><span class="row-arrow" aria-hidden="true">↗</span></a>
+<a class="journal-row" href="https://cat.kurashi-partner-ku.com/compare/okara-litter.html"><img src="assets/photos/coffee-600.webp" width="600" height="375" alt="暮らしの道具が並ぶカウンターのイメージ" loading="lazy" decoding="async"><div><p class="article-meta"><time datetime="2026-10-01">2026.10.01 更新</time></p><h3>おから猫砂12商品。<br>タイプ別に、おすすめを比較。</h3><span class="category-label">猫用品の比較</span></div><span class="row-arrow" aria-hidden="true">↗</span></a></div>
+      </div><p class="image-note">更新日はリンク先のサイトマップに基づきます。記事は猫パートナーに移動してご覧いただけます。</p>
+    </div></section>
+    <section class="media section" id="media"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">OUR MEDIA</p><h2>もっと深く知る、専門メディア。</h2></div><p>くらしパートナーの第一弾。</p></div>
+      <!-- Add future published media as another .media-feature; keep unpublished sites unlinked. -->
+      <article class="media-feature reveal"><div class="media-photo"><img src="assets/photos/mii-1000.webp" srcset="assets/photos/mii-600.webp 600w, assets/photos/mii-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1333" alt="ねこパートナーのミー" loading="lazy" decoding="async"><span class="status">公開中</span></div><div class="media-copy"><img class="cat-logo" src="assets/neko-partner-logo-compact.webp" width="413" height="320" alt="ねこパートナー" loading="lazy" decoding="async"><p class="category-label">くらしパートナーの猫専門メディア</p><h3>猫と、人と。<br>心地よい毎日のために。</h3><p>猫用品を比較して選べる「猫パートナー」。猫砂や猫トイレの比較、猫種図鑑、ちょっと息抜きできる「肉球であそぶ」まで。猫との暮らしを、いろいろな角度から。</p><div class="media-topics"><a href="https://cat.kurashi-partner-ku.com/compare/okara-litter.html">猫砂比較 ↗</a><a href="https://cat.kurashi-partner-ku.com/compare/cat-toilets.html">猫トイレ比較 ↗</a><a href="https://cat.kurashi-partner-ku.com/breeds/">猫種図鑑 ↗</a><a href="https://cat.kurashi-partner-ku.com/breeds/paw-pop.html">肉球であそぶ ↗</a></div><a class="button" href="https://uk-support1.github.io/cat-comparison-site/">猫パートナーを見る <span aria-hidden="true">↗</span></a></div></article>
+    </div></section>
+    <section class="about section" id="about" aria-labelledby="about-title"><div class="about-grid"><div class="about-photo"><img src="assets/photos/cooking-1000.webp" srcset="assets/photos/cooking-600.webp 600w, assets/photos/cooking-1000.webp 1000w" sizes="(min-width: 900px) 50vw, 100vw" width="1000" height="1500" alt="窓からの光が入るキッチンで、静かに料理をする人" loading="lazy" decoding="async"></div><div class="about-copy"><p class="eyebrow">ABOUT KURASHI PARTNER</p><h2 id="about-title">選ぶ時間を、<br>少し楽しい時間に。</h2><p>何を買うか。どう暮らすか。毎日には、たくさんの小さな選択があります。</p><p>くらしパートナーは、暮らしの「選ぶ」を支える総合ブランド。専門メディアを通じて、比較とわかりやすい情報を届けます。</p><dl class="values"><div><dt><span>01</span> 比べやすく</dt><dd>違いと選ぶポイントを、整理して伝える。</dd></div><div><dt><span>02</span> 暮らしに寄り添って</dt><dd>自分の生活に合うかどうかを、大切にする。</dd></div><div><dt><span>03</span> わかりやすく</dt><dd>はじめての人にも、やさしい言葉で。</dd></div></dl><a class="underlined-link" href="#future">これからの展開を見る <span aria-hidden="true">↗</span></a></div></div></section>
   </main>
-
-  <footer class="kp-footer"><div class="kp-shell"><div class="kp-footer-top"><a class="kp-footer-brand" href="https://kurashi-partner-ku.com/"><img src="assets/kurashi-partner-logo.png" alt="くらしパートナー"></a><nav aria-label="フッターナビゲーション"><a href="#about">くらしパートナーとは</a><a href="#media">専門メディア</a><a href="#future">これからの展開</a><a href="https://uk-support1.github.io/cat-comparison-site/">猫パートナー</a></nav></div><p>暮らしの中の「選ぶ」を、もっとわかりやすく。</p><small>© くらしパートナー</small></div></footer>
-  <noscript><div class="kp-noscript">猫パートナーは <a href="https://uk-support1.github.io/cat-comparison-site/cat-home.html">こちら</a> からご覧いただけます。</div></noscript>
+  <footer class="site-footer"><div class="shell"><div class="footer-top"><a class="brand" href="https://kurashi-partner-ku.com/" aria-label="くらしパートナー ホーム"><img src="assets/kurashi-partner-logo-compact.webp" alt="" width="437" height="320"><span>くらしパートナー<small>暮らしの比較と読みもの</small></span></a><p>暮らしの中の「選ぶ」を、<br>もっとわかりやすく。</p></div><div class="footer-bottom"><nav aria-label="フッターナビゲーション"><a href="#about">くらしパートナーとは</a><a href="#media">専門メディア</a><a href="#future">これからの展開</a><a href="https://uk-support1.github.io/cat-comparison-site/">猫パートナー</a><a href="#top">ページの先頭へ ↑</a></nav><small>© くらしパートナー</small></div></div></footer>
+  <noscript><p class="noscript-note">猫パートナーは <a href="https://uk-support1.github.io/cat-comparison-site/cat-home.html">こちら</a> からもご覧いただけます。</p></noscript>
 </body>
 </html>
