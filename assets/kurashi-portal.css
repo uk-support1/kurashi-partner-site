@@ -256,3 +256,9 @@ a:hover .image-wrap img,.picture-story:hover>img{transform:scale(1.035)}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* Subsidy category: a first-class route into the growing life-services guide. */
+.subsidy-feature{display:grid;grid-template-columns:1.08fr .92fr;min-height:430px;overflow:hidden;background:#113e47;color:#fff}
+.subsidy-feature>img{width:100%;height:100%;min-height:430px;object-fit:cover}.subsidy-feature>div{display:flex;flex-direction:column;justify-content:center;padding:54px 58px}
+.subsidy-feature .category-label{color:#9ce0d5}.subsidy-feature h3{margin:12px 0 17px;font-family:var(--serif);font-size:clamp(28px,3.1vw,41px);font-weight:500;line-height:1.55}.subsidy-feature p{margin:0 0 26px;color:#d4e7e4;font-size:13px}.subsidy-feature .button{align-self:flex-start;background:#fff;color:#173b40}
+@media(max-width:700px){.subsidy-feature{grid-template-columns:1fr}.subsidy-feature>img{min-height:270px;height:270px}.subsidy-feature>div{padding:34px 25px 39px}.subsidy-feature h3{font-size:29px}.subsidy-feature p{font-size:12px}}
