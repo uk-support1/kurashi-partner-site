@@ -8,6 +8,9 @@ const data=read('assets/security/security-data.js');for(const city of ['setagaya
 const ui=read('assets/security/security.js');
 for(const product of ['Tapo_C530WS','Tapo_C320WS','T817001_1200x1200'])assert.ok(ui.includes(product),product+' official image');
 for(const phrase of ['s-grant-summary','対象経費の全額','対象経費の4分の3','対象経費の3分の2','対象経費の2分の1'])assert.ok(ui.includes(phrase),phrase+' resident-friendly grant presentation');
+const staticSeo={setagaya:['世田谷区の','100％','4万円','Tapo C530WS','Eufy SoloCam S340','世田谷区での補助後価格イメージ'],taito:['台東区の','75％','6万円','Tapo C530WS','Eufy SoloCam S340','台東区での補助後価格イメージ'],katsushika:['葛飾区の','50％','5万円','Tapo C530WS','Eufy SoloCam S340','葛飾区での補助後価格イメージ'],adachi:['足立区の','約67％','4万円','Tapo C530WS','Eufy SoloCam S340','足立区での補助後価格イメージ'],ota:['大田区の','75％','3万円','Tapo C530WS','Eufy SoloCam S340','大田区での補助後価格イメージ'],nerima:['練馬区の','75％','3万円','Tapo C530WS','Eufy SoloCam S340','練馬区での補助後価格イメージ']};
+for(const [slug,phrases] of Object.entries(staticSeo)){const html=read(`security/tokyo/${slug}/index.html`);for(const phrase of phrases)assert.ok(html.includes(phrase),`${slug} static SEO: ${phrase}`);}
+const cameraHtml=read('security/camera/index.html');for(const phrase of ['<h1>','Tapo C530WS','Tapo C320WS','Eufy SoloCam S340'])assert.ok(cameraHtml.includes(phrase),'camera static SEO: '+phrase);
 assert.ok(read('index.html').includes('href="security/"'),'parent homepage entrypoint');
 const map=read('sitemap.xml');for(const rel of pages)assert.ok(map.includes('https://kurashi-partner-ku.com/'+rel.replace('index.html','')),rel+' sitemap');
 console.log('PASS: parent security portal routes, assets, entrypoint, data, canonical URLs, and sitemap are present.');
