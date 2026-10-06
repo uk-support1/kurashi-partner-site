@@ -101,7 +101,8 @@
     selector.innerHTML = Object.values(data.municipalities).map(m => `<option value="${m.slug}">${m.name}｜${m.selectorLabel}</option>`).join('');
     const render = () => {
       const m = data.municipalities[selector.value];
-      document.querySelector('[data-selected-city]')?.textContent = m.name;
+      const selectedCity = document.querySelector('[data-selected-city]');
+      if (selectedCity) selectedCity.textContent = m.name;
       document.querySelector('[data-selected-rule]').textContent = `${m.name}では、${m.simulationText}として試算しています。`;
       productRoot.innerHTML = data.products.map(p => {
         const grant = data.grant(p.price,m), self = Math.max(0,p.price-grant);
