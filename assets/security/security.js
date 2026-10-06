@@ -102,7 +102,7 @@
     const render = () => {
       const m = data.municipalities[selector.value];
       document.querySelector('[data-selected-city]').textContent = m.name;
-      document.querySelector('[data-selected-rule]').textContent = `${m.rateLabel}（${m.maxText}）として試算`;
+      document.querySelector('[data-selected-rule]').textContent = `${m.name}では、${m.simulationText}として試算しています。`;
       productRoot.innerHTML = data.products.map(p => {
         const grant = data.grant(p.price,m), self = Math.max(0,p.price-grant);
         const setagayaRoundingNote = m.slug === 'setagaya' ? '<small class="s-setagaya-rounding">※世田谷区の補助額は100円未満切り捨てのため、全額補助の対象でも数十円程度の自己負担が生じる場合があります。</small>' : '';
