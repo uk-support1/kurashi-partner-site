@@ -30,7 +30,9 @@
   const officialProductImages = {
     'tapo-c530ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C530WS_EU_2.0_overview_01_large_20241113021926v.jpg', alt:'Tapo C530WS メーカー公式商品画像' },
     'tapo-c320ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C320WS_Tapo_C320WSP2_EU_2_large_20231228003445x.png', alt:'Tapo C320WS メーカー公式商品画像' },
-    'eufy-s340': { src:'https://www.ankerjapan.com/cdn/shop/files/T817001_1200x1200.jpg?v=1727250447', alt:'Eufy SoloCam S340 メーカー公式商品画像' }
+    'eufy-s340': { src:'https://www.ankerjapan.com/cdn/shop/files/T817001_1200x1200.jpg?v=1727250447', alt:'Eufy SoloCam S340 メーカー公式商品画像' },
+    'ring-outdoor-cam-plus': { src:'https://d1kusojqr3t85q.cloudfront.net/jrz4hnnvdyct/5mVN9opsCON6PtA5qIgPNc/093c45148937a8f6df9cf732c994c236/Outdoor-Cam-Plus.png?w=300', alt:'Ring Outdoor Cam Plus メーカー公式商品画像' },
+    'reolink-rlc810a': { src:'https://home-cdn.reolink.us/wp-content/uploads/assets/2020/07/rlc-810a-340.png', alt:'Reolink RLC-810A メーカー公式商品画像' }
   };
   const productPhoto = p => {
     const image = officialProductImages[p.id];
@@ -96,7 +98,6 @@
 
   const productRoot = document.querySelector('[data-product-root]');
   if (productRoot) {
-    productRoot.classList.add('s-featured-products');
     const selector = document.querySelector('[data-city-select]');
     selector.innerHTML = Object.values(data.municipalities).map(m => `<option value="${m.slug}">${m.name}｜${m.selectorLabel}</option>`).join('');
     const render = () => {
@@ -107,21 +108,11 @@
       productRoot.innerHTML = data.products.map(p => {
         const grant = data.grant(p.price,m), self = Math.max(0,p.price-grant);
         const setagayaRoundingNote = m.slug === 'setagaya' ? '<small class="s-setagaya-rounding">※世田谷区の補助額は100円未満切り捨てのため、全額補助の対象でも数十円程度の自己負担が生じる場合があります。</small>' : '';
-        return `<article class="s-product"><div class="s-product-image"><img src="${root}assets/security/camera-forms.png" alt="${p.name}を検討する際の屋外防犯カメラ設置イメージ" loading="lazy"><small>設置イメージ（商品そのものではありません）</small></div><div class="s-product-top"><span class="s-product-badge">${p.badge}</span><h2>${p.name}</h2><p class="s-maker">${p.maker}</p><p class="s-fit">補助制度との相性　${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</p></div><div class="s-product-body"><p>${p.note}</p><dl><div><dt>価格の扱い</dt><dd>${p.priceLabel}</dd></div><div><dt>画質</dt><dd>${p.resolution}</dd></div><div><dt>夜間撮影</dt><dd>${p.night}</dd></div><div><dt>パン/チルト</dt><dd>${p.ptz}</dd></div><div><dt>検知</dt><dd>${p.person}</dd></div><div><dt>防水・防塵</dt><dd>${p.weather}</dd></div><div><dt>電源 / 通信</dt><dd>${p.power}<br>${p.wifi}</dd></div><div><dt>録画</dt><dd>${p.local}<br>${p.cloud}</dd></div><div><dt>固定方法</dt><dd>${p.mount}</dd></div></dl><div class="s-product-actions">${link(p.official,'公式仕様を確認')}</div></div><div class="s-savings"><span>通常価格の目安（試算用）</span><strong>${data.yen(p.price)}</strong><span>${m.name}で要件を満たし、交付された場合の自己負担目安</span><strong>${data.yen(self)}</strong>${setagayaRoundingNote}<small>補助額 ${data.yen(grant)}。対象経費・固定設置・申請書類などの要件を満たし、申請が認められた場合の試算です。</small></div></article>`;
+        return `<article class="s-product"><div class="s-product-image">${productPhoto(p)}</div><div class="s-product-top"><span class="s-product-badge">${p.badge}</span><h2>${p.name}</h2><p class="s-maker">${p.maker}</p><p class="s-fit">補助制度との相性　${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</p></div><div class="s-product-body"><p>${p.note}</p><dl><div><dt>価格の扱い</dt><dd>${p.priceLabel}</dd></div><div><dt>画質</dt><dd>${p.resolution}</dd></div><div><dt>夜間撮影</dt><dd>${p.night}</dd></div><div><dt>パン/チルト</dt><dd>${p.ptz}</dd></div><div><dt>検知</dt><dd>${p.person}</dd></div><div><dt>防水・防塵</dt><dd>${p.weather}</dd></div><div><dt>電源 / 通信</dt><dd>${p.power}<br>${p.wifi}</dd></div><div><dt>録画</dt><dd>${p.local}<br>${p.cloud}</dd></div><div><dt>固定方法</dt><dd>${p.mount}</dd></div></dl><div class="s-product-actions">${link(p.official,'公式仕様を確認')}</div></div><div class="s-savings"><span>通常価格の目安（試算用）</span><strong>${data.yen(p.price)}</strong><span>${m.name}で要件を満たし、交付された場合の自己負担目安</span><strong>${data.yen(self)}</strong>${setagayaRoundingNote}<small>補助額 ${data.yen(grant)}。対象経費・固定設置・申請書類などの要件を満たし、申請が認められた場合の試算です。</small></div></article>`;
       }).join('');
       const comparison = document.querySelector('[data-comparison]');
       if (comparison) comparison.innerHTML = data.products.map(p => `<tr><td>${p.name}</td><td>${p.resolution}</td><td>${p.night}</td><td>${p.field}</td><td>${p.ptz}</td><td>${p.person}</td><td>${p.weather}</td><td>${p.power}</td><td>${p.local}</td><td>${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</td></tr>`).join('');
     };
     selector.addEventListener('change', render); render();
-    const refreshProductPhotos = () => document.querySelectorAll('.s-product').forEach((card, index) => {
-      const image = card.querySelector('.s-product-image');
-      const product = data.products[index];
-      if (image && product) {
-        card.hidden = !officialProductImages[product.id];
-        image.innerHTML = productPhoto(product);
-      }
-    });
-    selector.addEventListener('change', refreshProductPhotos);
-    refreshProductPhotos();
   }
 })();

@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const root=path.resolve(__dirname,'..');
 const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
 const pages=['security/index.html','security/tokyo/index.html','security/camera/index.html','security/tokyo/setagaya/index.html','security/tokyo/taito/index.html','security/tokyo/katsushika/index.html','security/tokyo/adachi/index.html','security/tokyo/ota/index.html','security/tokyo/nerima/index.html'];
-for(const rel of pages){const html=read(rel);assert.ok(html.includes('canonical'),rel+' canonical');assert.ok(!html.includes('noindex,follow'),rel+' must remain indexable on parent');assert.ok(html.includes('security.css'),rel+' shared CSS');assert.ok(html.includes('security-data.js?v=20261006-4'),rel+' versioned data source');assert.ok(html.includes('security.js?v=20261006-4'),rel+' versioned shared UI');}
+for(const rel of pages){const html=read(rel);assert.ok(html.includes('canonical'),rel+' canonical');assert.ok(!html.includes('noindex,follow'),rel+' must remain indexable on parent');assert.ok(html.includes('security.css?v=20261006-5'),rel+' versioned shared CSS');assert.ok(html.includes('security-data.js?v=20261006-5'),rel+' versioned data source');assert.ok(html.includes('security.js?v=20261006-5'),rel+' versioned shared UI');}
 for(const asset of ['assets/security/home-security-hero.png','assets/security/security-entrance.png','assets/security/security-garden.png','assets/security/camera-forms.png'])assert.ok(fs.existsSync(path.join(root,asset)),asset);
 const data=read('assets/security/security-data.js');for(const city of ['setagaya','taito','katsushika','adachi','ota','nerima'])assert.ok(data.includes(city+":"),city);
 const sandbox={window:{}};vm.runInNewContext(data,sandbox,{filename:'security-data.js'});const portal=sandbox.window.SecurityPortal;
@@ -17,7 +17,10 @@ assert.equal(19980-portal.grant(19980,'setagaya'),80,'世田谷区: 19,980円の
 assert.equal(15999-portal.grant(15999,'setagaya'),99,'世田谷区: 15,999円の自己負担');
 assert.equal(portal.municipalities.setagaya.roundingUnit,100,'世田谷区の端数処理');
 const ui=read('assets/security/security.js');
-for(const product of ['Tapo_C530WS','Tapo_C320WS','T817001_1200x1200'])assert.ok(ui.includes(product),product+' official image');
+for(const product of ['Tapo_C530WS','Tapo_C320WS','T817001_1200x1200','Outdoor-Cam-Plus.png','rlc-810a-340.png'])assert.ok(ui.includes(product),product+' official image');
+assert.ok(!ui.includes("classList.add('s-featured-products')"),'comparison cards use a regular grid');
+assert.ok(ui.includes('productPhoto(p)'), 'comparison cards render their matching product photos');
+const css=read('assets/security/security.css');for(const rule of ['.s-product-grid[data-product-root]{grid-template-columns:repeat(3,minmax(0,1fr))','@media(max-width:820px){.s-product-grid[data-product-root]{grid-template-columns:repeat(2,minmax(0,1fr))}','@media(max-width:640px){.s-product-grid[data-product-root]{grid-template-columns:1fr'])assert.ok(css.includes(rule),'responsive comparison grid: '+rule);
 for(const phrase of ['s-grant-summary','s-setagaya-rounding','m.selectorLabel','m.slug === \'setagaya\''])assert.ok(ui.includes(phrase),phrase+' resident-friendly grant presentation');
 for(const [city,label] of Object.entries({setagaya:'全額補助・最大4万円',taito:'4分の3補助・最大6万円',katsushika:'半額補助・最大5万円',adachi:'約3分の2補助・最大4万円',ota:'4分の3補助・最大3万円',nerima:'4分の3補助・最大3万円'}))assert.equal(portal.municipalities[city].selectorLabel,label,`${city} selector label`);
 assert.equal(portal.municipalities.setagaya.simulationText,'対象となる購入・設置費を最大4万円まで全額補助する制度','世田谷区の試算説明');
