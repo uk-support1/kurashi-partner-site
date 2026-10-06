@@ -31,7 +31,7 @@
     'tapo-c530ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C530WS_EU_2.0_overview_01_large_20241113021926v.jpg', alt:'Tapo C530WS メーカー公式商品画像' },
     'tapo-c320ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C320WS_Tapo_C320WSP2_EU_2_large_20231228003445x.png', alt:'Tapo C320WS メーカー公式商品画像' },
     'eufy-s340': { src:'https://www.ankerjapan.com/cdn/shop/files/T817001_1200x1200.jpg?v=1727250447', alt:'Eufy SoloCam S340 メーカー公式商品画像' },
-    'ring-outdoor-plus': { src:'https://d1kusojqr3t85q.cloudfront.net/jrz4hnnvdyct/5mVN9opsCON6PtA5qIgPNc/093c45148937a8f6df9cf732c994c236/Outdoor-Cam-Plus.png?w=300', alt:'Ring Outdoor Cam Plus メーカー公式商品画像' },
+    'ring-outdoor-plus': { src:'https://images.ctfassets.net/jrz4hnnvdyct/5mVN9opsCON6PtA5qIgPNc/093c45148937a8f6df9cf732c994c236/Outdoor-Cam-Plus.png', alt:'Ring Outdoor Cam Plus メーカー公式商品画像' },
     'reolink-rlc810a': { src:'https://home-cdn.reolink.us/wp-content/uploads/assets/2020/07/rlc-810a-340.png', alt:'Reolink RLC-810A メーカー公式商品画像' }
   };
   const productPhoto = p => {
