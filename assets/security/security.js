@@ -4,7 +4,43 @@
   if (!data) return;
   const root = document.body.dataset.root || '/';
   const cityPath = slug => `${root}security/tokyo/${slug}/`;
-  const status = m => `<span class="s-status ${m.status === 'caution' ? 'caution' : m.status === 'closed' ? 'closed' : ''}">${m.status === 'active' ? '●' : m.status === 'caution' ? '●' : '●'} ${m.statusLabel}</span><span class="s-update">最終確認：${data.checked.replaceAll('-','年').replace(/年(\d\d)$/, '年$1日')}</span>`;
+  const formatDate = value => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+    const [year, month, day] = value.split('-');
+    return `${year}年${Number(month)}月${Number(day)}日`;
+  };
+  const status = m => `<span class="s-status ${m.status === 'caution' ? 'caution' : m.status === 'closed' ? 'closed' : ''}">${m.status === 'active' ? '●' : m.status === 'caution' ? '●' : '●'} ${m.statusLabel}</span><span class="s-update">最終確認：${formatDate(data.checked)}</span>`;
+  const rateInfo = m => ({
+    1: { value:'100％', detail:'対象経費の全額' },
+    0.75: { value:'75％', detail:'対象経費の4分の3' },
+    0.6666666666666666: { value:'約67％', detail:'対象経費の3分の2' },
+    0.5: { value:'50％', detail:'対象経費の2分の1' }
+  }[m.rate] || { value:m.rateLabel, detail:'対象経費の一部' });
+  const friendlyFeature = m => {
+    const detail = {
+      adachi:'防犯カメラ（個人住宅）の目安です。ほかの品目は条件が異なります。',
+      taito:'今回掲載の6自治体では、最大額が最も大きい制度です。',
+      katsushika:'インターネット購入も申請フローに明記されています。',
+      ota:'Amazon購入では、保存する書類の組み合わせを確認してください。',
+      nerima:'通販で購入する場合も、領収書を発行できるか確認してください。',
+      setagaya:'対象品目・購入日などの条件は、申請前に公式ページで確認してください。'
+    }[m.slug] || '';
+    return `補助率は${rateInfo(m).value}、最大${m.maxLabel}。${detail}`;
+  };
+  const grantSummary = m => {
+    const rate = rateInfo(m);
+    const max = m.maxLabel.replace(/（.*?）/, '');
+    return `<div class="s-grant-summary"><div class="s-grant-item s-grant-max"><span>最大補助額</span><strong><em>最大</em>${max}</strong></div><div class="s-grant-item"><span>補助率</span><strong>${rate.value}</strong><small>${rate.detail}</small></div><div class="s-grant-item s-grant-status"><span>受付状況</span>${status(m)}<small>期限：${m.deadline}</small></div></div><p class="s-grant-note">対象経費・条件・端数処理は、申請前に自治体公式情報でご確認ください。</p>`;
+  };
+  const officialProductImages = {
+    'tapo-c530ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C530WS_EU_2.0_overview_01_large_20241113021926v.jpg', alt:'Tapo C530WS メーカー公式商品画像' },
+    'tapo-c320ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C320WS_Tapo_C320WSP2_EU_2_large_20231228003445x.png', alt:'Tapo C320WS メーカー公式商品画像' },
+    'eufy-s340': { src:'https://www.ankerjapan.com/cdn/shop/files/T817001_1200x1200.jpg?v=1727250447', alt:'Eufy SoloCam S340 メーカー公式商品画像' }
+  };
+  const productPhoto = p => {
+    const image = officialProductImages[p.id];
+    return image ? `<a class="s-product-photo-link" href="${p.official}" target="_blank" rel="noopener noreferrer" aria-label="${p.name}の公式製品ページを開く"><img src="${image.src}" alt="${image.alt}" loading="lazy" referrerpolicy="no-referrer"><small>メーカー公式商品画像</small></a>` : '';
+  };
   const link = (url, label) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label} <span aria-hidden="true">↗</span></a>`;
   const cityLinks = () => Object.values(data.municipalities).map(m => `<a class="s-city-link" href="${cityPath(m.slug)}"><span>${m.name}</span><span>${m.maxLabel}</span></a>`).join('');
   document.querySelectorAll('[data-city-links]').forEach(el => el.innerHTML = cityLinks());
@@ -33,14 +69,26 @@
     document.querySelectorAll('[data-muni-max]').forEach(e => e.textContent = m.maxLabel);
     document.querySelectorAll('[data-muni-status]').forEach(e => e.innerHTML = status(m));
     const fields = { feature:'feature', eligible:'eligible', online:'online', purchasedFrom:'purchasedFrom', documents:'documents', method:'method', deadline:'deadline', unique:'unique', caution:'caution' };
-    Object.entries(fields).forEach(([key, prop]) => document.querySelectorAll(`[data-muni-${key}]`).forEach(e => e.textContent = m[prop]));
+    Object.entries(fields).forEach(([key, prop]) => document.querySelectorAll(`[data-muni-${key}]`).forEach(e => e.textContent = key === 'feature' ? friendlyFeature(m) : m[prop]));
+    const heroLead = auto?.querySelector('.s-page-title > p:not(.s-source)');
+    if (heroLead) heroLead.textContent = `${m.name}で自宅の防犯対策を検討する方向けに、公式情報で確認できた補助制度を整理しています。${friendlyFeature(m)}`;
     document.querySelectorAll('[data-muni-official]').forEach(e => { e.href = m.official; e.textContent = `${m.name}公式サイトで最新情報を確認`; });
-    document.querySelectorAll('[data-muni-updated]').forEach(e => e.textContent = `公式情報確認日：${data.checked.replaceAll('-','年').replace(/年(\d\d)$/, '年$1日')}（公式ページ更新日：${m.officialUpdated.replaceAll('-','年').replace(/年(\d\d)$/, '年$1日')}）`);
+    document.querySelectorAll('[data-muni-updated]').forEach(e => e.textContent = `公式情報確認日：${formatDate(data.checked)}（公式ページ更新日：${formatDate(m.officialUpdated)}）`);
+    document.querySelectorAll('.s-muni-lead').forEach(el => { el.innerHTML = grantSummary(m); });
     const sim = document.querySelector('[data-muni-simulation]');
     if (sim) { const amount = 49800, grant = data.grant(amount,m); sim.innerHTML = `<div><span>防犯カメラの価格例</span><strong>${data.yen(amount)}</strong></div><div><span>${m.name}の補助額目安</span><strong>−${data.yen(grant)}</strong></div><div><span>自己負担の目安</span><strong>${data.yen(Math.max(0,amount-grant))}</strong></div>`; }
     const products = document.querySelector('[data-muni-products]');
-    if (products) products.innerHTML = data.products.slice(0,3).map(p => `<article><div class="s-product-image"><img src="${root}assets/security/camera-forms.png" alt="屋外防犯カメラの設置イメージ" loading="lazy"><small>設置イメージ</small></div><span class="s-product-badge">${p.badge}</span><h3>${p.name}</h3><p>${p.note}</p><p class="s-stars">補助制度との相性 ${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</p><a class="s-button outline" href="${root}security/camera/">補助後の目安を見る</a></article>`).join('');
-    if (auto) auto.querySelectorAll('.s-product-mini article').forEach(card => card.insertAdjacentHTML('afterbegin', `<div class="s-product-image"><img src="${root}assets/security/camera-forms.png" alt="屋外防犯カメラの設置イメージ" loading="lazy"><small>設置イメージ</small></div>`));
+    if (products) products.innerHTML = data.products.slice(0,3).map(p => `<article><div class="s-product-image">${productPhoto(p)}</div><span class="s-product-badge">${p.badge}</span><h3>${p.name}</h3><p>${p.note}</p><p class="s-stars">補助制度との相性 ${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</p><a class="s-button outline" href="${root}security/camera/">補助後の目安を見る</a></article>`).join('');
+    document.querySelectorAll('.s-product-mini article').forEach((card, index) => {
+      const product = data.products[index];
+      let image = card.querySelector('.s-product-image');
+      if (!image && product) {
+        image = document.createElement('div');
+        image.className = 's-product-image';
+        card.prepend(image);
+      }
+      if (image && product) image.innerHTML = productPhoto(product);
+    });
     if (slug === 'setagaya' && !document.querySelector('[data-setagaya-chart]')) { const chart = document.createElement('section'); chart.className='s-section'; chart.dataset.setagayaChart=''; chart.innerHTML=`<div class="s-shell"><div class="s-donut-layout"><div class="s-donut"><strong>1,914<small>8月末受付件数</small></strong></div><div class="s-donut-copy"><p class="s-eyebrow">SETAGAYA / OFFICIAL UPDATE</p><h3>概算1万件に対し、<br>約2割を受付。</h3><p>世田谷区が公表する令和8年度の受付件数と受付可能件数（概算）を可視化しました。予算・審査状況で数値は変動します。</p><p class="s-source">出典：世田谷区「住まいの防犯対策サポート事業」（2026年8月31日現在の受付状況）</p></div></div></div></section>`; document.querySelector('main')?.append(chart); }
     const faq = [
       {q:`${m.name}でAmazon・通販購入した防犯カメラは補助対象ですか？`,a:`通販購入の可否や必要書類は${m.name}の制度条件によります。領収書、商品名・型番、支払い事実、設置後写真等が求められる場合があります。購入前に公式ページで確認してください。`},
@@ -68,5 +116,15 @@
       if (comparison) comparison.innerHTML = data.products.map(p => `<tr><td>${p.name}</td><td>${p.resolution}</td><td>${p.night}</td><td>${p.field}</td><td>${p.ptz}</td><td>${p.person}</td><td>${p.weather}</td><td>${p.power}</td><td>${p.local}</td><td>${'★'.repeat(p.fit)}${'☆'.repeat(5-p.fit)}</td></tr>`).join('');
     };
     selector.addEventListener('change', render); render();
+    const refreshProductPhotos = () => document.querySelectorAll('.s-product').forEach((card, index) => {
+      const image = card.querySelector('.s-product-image');
+      const product = data.products[index];
+      if (image && product) {
+        card.hidden = !officialProductImages[product.id];
+        image.innerHTML = productPhoto(product);
+      }
+    });
+    selector.addEventListener('change', refreshProductPhotos);
+    refreshProductPhotos();
   }
 })();
