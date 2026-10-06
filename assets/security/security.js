@@ -10,7 +10,9 @@
     return `${year}年${Number(month)}月${Number(day)}日`;
   };
   const status = m => `<span class="s-status ${m.status === 'caution' ? 'caution' : m.status === 'closed' ? 'closed' : ''}">${m.status === 'active' ? '●' : m.status === 'caution' ? '●' : '●'} ${m.statusLabel}</span><span class="s-update">最終確認：${formatDate(data.checked)}</span>`;
-  const rateInfo = m => ({
+  const rateInfo = m => m.calculation === 'adachi-camera'
+    ? { value:'3分の2', detail:'区独自分（都補助相当額を別途合算）' }
+    : ({
     1: { value:'100％', detail:'対象経費の全額' },
     0.75: { value:'75％', detail:'対象経費の4分の3' },
     0.6666666666666666: { value:'約67％', detail:'対象経費の3分の2' },
@@ -30,7 +32,7 @@
   const grantSummary = m => {
     const rate = rateInfo(m);
     const max = m.maxLabel.replace(/（.*?）/, '');
-    return `<div class="s-grant-summary"><div class="s-grant-item s-grant-max"><span>最大補助額</span><strong><em>最大</em>${max}</strong></div><div class="s-grant-item"><span>補助率</span><strong>${rate.value}</strong><small>${rate.detail}</small></div><div class="s-grant-item s-grant-status"><span>受付状況</span>${status(m)}<small>期限：${m.deadline}</small></div></div><p class="s-grant-note">対象経費・条件・端数処理は、申請前に自治体公式情報でご確認ください。</p>`;
+    return `<div class="s-grant-summary"><div class="s-grant-item s-grant-max"><span>最大補助額</span><strong><em>最大</em>${max}</strong></div><div class="s-grant-item"><span>補助率</span><strong>${rate.value}</strong><small>${rate.detail}</small></div><div class="s-grant-item s-grant-status"><span>受付状況</span>${status(m)}<small>期限：${m.deadline}</small></div></div><p class="s-grant-note">端数処理：${m.roundingLabel}。対象経費・条件は、申請前に自治体公式情報でご確認ください。</p>`;
   };
   const officialProductImages = {
     'tapo-c530ws': { src:'https://static.tp-link.com/upload/image-line/Tapo_C530WS_EU_2.0_overview_01_large_20241113021926v.jpg', alt:'Tapo C530WS メーカー公式商品画像' },
