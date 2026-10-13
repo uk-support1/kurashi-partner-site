@@ -33,6 +33,24 @@
 
 ## GA4
 
-Googleタグは `assets/analytics.js` で共通管理しています。測定IDは `G-28D2LPB1XC` です。
-現在の全ページ（`index.html`）の `<head>` から読み込み、Googleの `gtag.js` を非同期で取得します。
-新しいHTMLページを追加する場合も、`<head>` に `<script src="assets/analytics.js"></script>` を1回追加してください。サブディレクトリ内のページでは `../assets/analytics.js` など、階層に合わせて相対パスを調整します。測定IDを変更する場合は共通ファイルだけを更新してください。
+Googleタグは `assets/analytics.js` で共通管理し、既存の測定ID `G-28D2LPB1XC` を使用します。GTMではなくgtag.js直接設置です。トップと防犯ポータル配下を含む全10ページのheadから、共通ファイルを同期的に一度だけ読み込みます。独自GA4イベント、Cookie同意管理、他のアクセス解析タグは現在ありません。
+
+新しいページでも、階層に合わせた `assets/analytics.js?v=20261013-1` の同期scriptをhead内の最初のscriptとして追加してください。async/deferを付けたり、別のGoogleタグを重複設置したりしないでください。共通ファイルの更新時は、各ページのバージョンも揃えて更新します。
+
+### ブラウザ単位の計測除外（2026-10-13）
+
+- Googleタグを読み込む前に除外を判定し、`window['ga-disable-G-28D2LPB1XC']` を設定します。除外時はgtag.js自体を読み込まず、ページビュー・拡張計測・独自イベントのキュー投入も抑止します。send_page_viewだけを無効にする実装ではありません。[Google公式のオプトアウト仕様](https://developers.google.com/tag-platform/security/guides/privacy?hl=ja)に準拠した無効化フラグを利用しています。
+- 設定Cookieは `__Host-kurashi-analytics-preference`。Secure、SameSite=Lax、Path=/、Domain属性なしのホスト限定です。有効期間は保存から365日。各ブラウザごとに保存し、登録台数に上限はありません。別ブラウザ・別プロファイルでは再設定が必要です。
+- `kurashi-partner-ku.com` 全パスだけが対象です。別リポジトリの `cat.kurashi-partner-ku.com` やその他サブドメインにはCookieを共有しません。
+- 保存後にCookieを読み返して結果を検証します。保存拒否・例外時には成功表示せず、そのページの計測を停止して保存失敗を通知します。解除時も保存を確認してから計測を再開します。既存のGA Cookieやブラウザ拡張等が設定した無効化フラグは消しません。
+- 操作用クエリだけを除去し、他のクエリの元のエンコード・重複キー・ハッシュを維持します。矛盾する操作指定では計測停止を優先します。URL整理はGA4の初期化より前に行います。
+- 成功表示は6秒、保存失敗は9秒で消えます。画面操作を遮らず、スクリーンリーダーに対応したstatus表示です。通常アクセス時には何も表示しません。
+- 同一オリジンの別タブへlocalStorageのstorageイベントで変更を通知します。localStorageが利用できなくてもCookie保存には影響せず、タブのfocus・pageshow・visibilitychangeで状態を再確認します。ブラウザが停止中のタブ等は再開時に反映します。
+- 操作は認証ではなく、そのブラウザ自身の解析送信だけを制御するものです。他人やサイト全体の設定を変更する権限はありません。操作用リンクは公開メニュー、サイトマップ、検索向けページには掲載しません。
+- Cookie削除、プライベートブラウズ終了、ブラウザ側の保存期間制限等で設定は失われる場合があります。その場合は再登録してください。IPフィルタやGTM管理画面での追加設定は不要です。
+
+### 自動テスト
+
+`node --test tests/analytics-exclusion.test.cjs tests/security-portal.test.cjs`
+
+除外・解除の初期化順、保存失敗、他パラメータの保持、複数タブ、二重初期化防止、全ページへの同期設置をテストします。Cookieはテスト用モデルのため、このテストだけで実ブラウザの通信停止・Cookieの永続化・実機でのブラウザ再起動を検証したことにはなりません。公開後の実ブラウザではNetworkのGoogleタグ・GA4 collectリクエストの有無を別途確認してください。
